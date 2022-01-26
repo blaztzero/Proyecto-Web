@@ -2,7 +2,7 @@
 
 include_once '../Controlador/conexion.php';
 
-class ProductoDAO{
+class PedidoDAO{
 //Contructores
 //Metodos
 //Atributos
@@ -10,14 +10,14 @@ class ProductoDAO{
 
 //Create
  
-public function Insert($nombre, $tipoProducto, $Descripcion, $Stock, $Precio, $codigoBarra){
+public function Insert($idUsuario, $idPersona, $idProducto, $metododepago,$paisDestino,$direccionEnvio){
 	try{
-		$sql = "insert into producto (nombre, tipoProducto, Descripcion, Stock, precio, codigoBarra) values(:nombre,:tipoProducto,:Descripcion,:Stock,:precio,:codigoBarra)";
+		$sql = "insert into pedido (idusuario, idpersona, idProducto, metododepago, PaisDestino, DireccionEnvio) values(:idusuario,:idpersona,:idproducto,:metododepago,:paisDestino,:direccionEnvio)";
 		
 		$con = Conectar();
 		
 		$respuesta = $con->prepare($sql);
-		$respuesta->execute(array('nombre' => $nombre, 'tipoProducto' => $tipoProducto, 'Descripcion' => $Descripcion, 'Stock' => $Stock, 'Precio' => $Precio, 'codigoBarra' => $codigoBarra));
+		$respuesta->execute(array('idusuario' => $idUsuario, 'idpersona' => $idPersona, 'idproducto' => $idProducto, 'metododepago' => $metododepago, 'paisDestino' => $paisDestino, 'direccionEnvio' => $direccionEnvio));
 		
 		$respuesta = "Almacenado Correctamente";
 		
@@ -28,14 +28,14 @@ public function Insert($nombre, $tipoProducto, $Descripcion, $Stock, $Precio, $c
 	return $respuesta;
 }
 
-public function Update($id, $nombre, $tipoProducto, $Descripcion, $Stock, $codigoBarra){
+public function Update($id, $idUsuario, $idPersona, $idProducto, $metododepago, $paisDestino,$direccionEnvio){
 	try{
-		$sql = "update producto set nombre = :nombre, tipoProducto = :tipoProducto, Descripcion = :Descripcion, stock = :stock , codigoBarra = :codigoBarra where id = :id";
+		$sql = "update producto set idusuario = :idusuario, idproducto = :idproducto, metododepago = :metododepago, paisDestino = :paisDestino , direccionEnvio = :direccionEnvio where id = :id";
 		
 		$con = Conectar();
 		
 		$respuesta = $con->prepare($sql);
-		$respuesta->execute(array('id' => $id,'nombre' => $nombre, 'tipoProducto' => $tipoProducto, 'Descripcion' => $Descripcion, 'stock' => $stock, 'codigoBarra' => $codigoBarra));
+		$respuesta->execute(array('id' => $id,'idusuario' => $idUsuario, 'idpersona' => $idpersona, 'idproducto' => $idProducto, 'metododepago' => $metododepago, 'paisDestino' => $paisDestino, 'direccionEnvio' => $direccionEnvio));
 		
 		$respuesta = "producto Modificado Correctamente";
 		
@@ -65,11 +65,11 @@ public function delete_persona($id){
 }
 
 
-public function BuscarProductos(){
+public function BuscarPedidos(){
 	try{
 		
 		$con = Conectar();
-		$sql = "select * from producto";
+		$sql = "select * from pedido";
 		
 		$respuesta = $con->prepare($sql);
 		$respuesta->execute();
@@ -77,6 +77,28 @@ public function BuscarProductos(){
 		$Result = $respuesta->fetchAll(PDO::FETCH_ASSOC);
 		
 		$Json = json_encode($Result);
+	}
+	catch(Exception $ex){
+		$Json = "Error";
+	}finally{
+		$con = null;
+	}
+	return $Json;
+}
+public function ContarPedidos(){
+	try{
+		
+		$con = Conectar();
+		$sql = "select count(*)conteo from Pedido";
+		
+		$respuesta = $con->prepare($sql);
+		$respuesta->execute();
+		
+		$Result = $respuesta->fetchAll(PDO::FETCH_ASSOC);
+		
+		$Json = json_encode($Result);
+		
+		
 	}
 	catch(Exception $ex){
 		$Json = "Error";
@@ -86,48 +108,6 @@ public function BuscarProductos(){
 	return $Json;
 }
 
-public function ContarProductos(){
-	try{
-		
-		$con = Conectar();
-		$sql = "select count(*)conteo from Producto";
-		
-		$respuesta = $con->prepare($sql);
-		$respuesta->execute();
-		
-		$Result = $respuesta->fetchAll(PDO::FETCH_ASSOC);
-		
-		$Json = json_encode($Result);
-		
-		
-	}
-	catch(Exception $ex){
-		$Json = "Error";
-	}finally{
-		$con = null;
-	}
-	return $Json;
-}
-public function BuscarProductoPorID($id){
-	try{
-		
-		$con = Conectar();
-		$sql = "select * from Producto where idproducto = :id";
-		
-		$respuesta = $con->prepare($sql);
-		$respuesta->execute();
-		
-		$Result = $respuesta->fetchAll(PDO::FETCH_ASSOC);
-		
-		$Json = json_encode($Result);
-	}
-	catch(Exception $ex){
-		$Json = "Error";
-	}finally{
-		$con = null;
-	}
-	return $Json;
-}
 }
 
 ?>

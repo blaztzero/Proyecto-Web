@@ -5,7 +5,7 @@
 		try{
 			//Codigo que se ejecuta en TRY siempre cuando se requiere
 			
-			$con = new PDO("mysql:host=localhost;dbname=clientedb_inacap", "root", "");
+			$con = new PDO("mysql:host=localhost;dbname=cliente2db_inacap", "root", "");
 			
 		} catch(PDOException $e){
 			//En caso de error solamente entramos aca	

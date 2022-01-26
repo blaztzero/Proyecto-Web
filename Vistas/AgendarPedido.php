@@ -1,6 +1,6 @@
 <?php
 
-	$id = $_GET["idpersona"];
+	$idPersona = $_GET["idpersona"];
 	$nombre = $_GET["nombre"];
 	$ap1 = $_GET["ap1"];
 	$ap2 = $_GET["ap2"];
@@ -32,7 +32,7 @@
 	<br><br>
 	
 		<center>
-				<h1><font color = 'white'>Vender Producto </font></h1>
+				<h1><font color = 'white'>Agendar Pedido </font></h1>
 				<br>
 				</center>
 			<div class= "container text-light" style = "width:100%">
@@ -62,32 +62,74 @@
 					</div>
 					<div class="form-group col-md-4">
 					  <label for="inputState">Metodo De Pago</label>
-					  <select id="inputState" class="form-control">
+					  <select id="metodoPago" class="form-control">
 						<option selected>Pago Efectivo</option>
 						<option>Tarjeta De Credito</option>
 						<option>Transferencia Bancaria</option>
+						<option>Cheque 30 Dias</option>
 					  </select>
 					</div>
 					<div class="form-group col-md-2">
 					  <label for="inputZip">ID</label>
-					  <input type="text" class="form-control" id="inputZip" value="<?php print $id ?>">
+					  <input type="text" class="form-control" id="idPersona" value="<?php print $idPersona ?>">
+					</div>
+					<div class="form-group col-md-6">
+					  <label for="inputCity">Direccion De Envio</label>
+					  <input type="text" class="form-control" id="direccionEnvio" value="">
+					</div>
+					<div class="form-group col-md-4">
+					  <label for="inputState">Pais Destino</label>
+					  <select id="paisDestino" class="form-control">
+						<option selected>Chile</option>
+						<option>Argentina</option>
+						<option>Brasil</option>
+						<option>Peru</option>
+						<option>Francia</option>
+						<option>Colombia</option>
+						<option>Espania</option>
+						<option>EEUU</option>
+						<option>Dinamarca</option>
+						<option>Italia</option>
+						<option>Uruguay</option>
+						<option>China</option>
+						<option>Japon</option>
+						<option>Rusia</option>
+						<option>Portugal</option>
+						<option>Grecia</option>
+						<option>Mexico</option>
+						<option>Canada</option>
+						<option>Holanda</option>
+						<option>Republica Checa</option>
+						<option>Korea del sur</option>
+						<option>Ecuador</option>
+						<option>Nueva zelanda</option>
+						<option></option>
+					  </select>
+					</div>
+					<div class="form-group col-md-4">
+					  <label for="inputState">Tipo De Envio</label>
+					  <select id="paisDestino" class="form-control">
+						<option selected>Aereo (mas costoso) 20 dias aprox</option>
+						<option>Maritimo (medio) 60 dias aprox</option>
+						<option>Terrestre(economico) 120 dias aprox</option>
+						
+					  </select>
 					</div>
 				  </div>
-				 
+				  
 				 
 				</form>
 					</div>
 		<center>
-<body background = "../resource/img/fondoProductos.jpg">
+
 <br><br>
-<a href="../Controlador/insertarProducto.php" class="btn btn-primary">Nuevo Producto</a>
-<a href="../vistas/principal.php" class="btn btn-success">Lista De Clientes</a>
+
 <br><br>
 </center>
 <div class="container-md bg-light text-dark" >
 
-	<table id="tablaproductos" class="table table-striped table-dark" border='1' >
-		<thead class="table table-striped table-success">
+	<table id="tablaproductos" class="table table-striped" border='1' >
+		<thead class="table table-info">
 		<tr>
 			<th>ID</th>
 			<th>Nombre</th>
@@ -119,8 +161,7 @@
 				<td> <?php print $objper->codigoDeBarra; ?> </td>
 				
 				<td> <input class="form-control" type="number"  name="cantidadVendidos" value="1"/></td>
-				<td><a class="btn btn-success" href="modicar.php?id=<?php print $objper->id; ?>&nombre=<?php print $objper->nombre; ?>&ap1=<?php print $objper->ap1; ?>&ap2=<?php print $objper->ap2; ?>&sexo=<?php print $objper->sexo; ?>&direccion=<?php print $objper->direccion; ?>">Modificar</a></td>
-				<td><a class="btn btn-primary" href="factura.php?id=<?php print $objper->id; ?>&idPersona=<?php print $id;?>">Vender Producto</a></td>
+				<td><a class="btn btn-success" href="../Controlador/recibePedido.php?idProducto=<?php print $objper->id; ?>&idPersona=<?php print $idPersona;?>&idusuario=<?php print $usu[0]->idusuario;?>&paisDestino=paisDestino&direccionEnvio=direccionEnvio&metododepago=metodoPago">Agendar Pedido</a></td>
 			</tr>
 			
 			<?php	
@@ -130,7 +171,10 @@
 	</table>
 	
 </div>	
- <button type="submit" class="btn btn-primary">Enviar info</button>
+<center>
+<a href="../Controlador/insertarProducto.php" class="btn btn-primary">Nuevo Producto</a>
+<a href="../vistas/principal.php" class="btn btn-success">Lista De Clientes</a>
+ 
 </center>		
 	</body>
 </html>

@@ -105,6 +105,28 @@ public function BuscarPersonasPorID($id){
 	}
 	return $Json;
 }
+public function ContarClientes(){
+	try{
+		
+		$con = Conectar();
+		$sql = "select count(*)conteo from persona";
+		
+		$respuesta = $con->prepare($sql);
+		$respuesta->execute();
+		
+		$Result = $respuesta->fetchAll(PDO::FETCH_ASSOC);
+		
+		$Json = json_encode($Result);
+		
+		
+	}
+	catch(Exception $ex){
+		$Json = "Error";
+	}finally{
+		$con = null;
+	}
+	return $Json;
+}
 }
 
 ?>

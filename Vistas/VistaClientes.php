@@ -65,8 +65,6 @@
 			<th>Observacion</th>
 			<th>Empresa</th>
 			<th></th>
-			<th></th>
-			<th></th>
 		</tr>
 		</thead>
 		<?php
@@ -86,13 +84,8 @@
 				<td> <?php print $objper->direccion; ?> </td>
 				<td> <?php print $objper->observacion; ?> </td>
 				<td> <?php print $objper->Empresa; ?> </td>
-				<td><a class="btn btn-danger" href="../Controlador/eliminarPersona.php?idpersona=<?php print $objper->idpersona; ?>">Eliminar</a></td>
-				
 				<td>
-				<a class="btn btn-success" href="../Controlador/modificarPersona.php?idpersona=<?php print $objper->idpersona; ?>&nombre=<?php print $objper->nombre; ?>&ap1=<?php print $objper->ap1; ?>&ap2=<?php print $objper->ap2; ?>&telefono=<?php print $objper->telefono; ?>&correo=<?php print $objper->correo; ?>&direccion=<?php print $objper->direccion;?>&observacion=<?php print $objper->observacion ?>;">Modificar</a></td>
-			
-				<td>
-				<a class="btn btn-primary" href="../vistas/VenderProducto.php?idpersona=<?php print $objper->idpersona; ?>&nombre=<?php print $objper->nombre; ?>&ap1=<?php print $objper->ap1; ?>&ap2=<?php print $objper->ap2; ?>&telefono=<?php print $objper->telefono; ?>&correo=<?php print $objper->correo; ?>&direccion=<?php print $objper->direccion;?>&observacion=<?php print $objper->observacion ?>;">Vender Productos</a></td>
+				<a class="btn btn-primary" href="../vistas/AgendarPedido.php?idpersona=<?php print $objper->idpersona; ?>&nombre=<?php print $objper->nombre; ?>&ap1=<?php print $objper->ap1; ?>&ap2=<?php print $objper->ap2; ?>&telefono=<?php print $objper->telefono; ?>&correo=<?php print $objper->correo; ?>&direccion=<?php print $objper->direccion;?>&observacion=<?php print $objper->observacion ?>;">Agendar Pedido</a></td>
 			</tr>
 			<?php	
 			//<input type="button" onclick="EliminarPersona()" value="Eliminar" /> 

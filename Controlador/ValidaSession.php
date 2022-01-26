@@ -22,7 +22,7 @@
 			if ( $Json != "[]" ){
 			
 				$_SESSION["usuario"] = $Json;
-				header('Location: ../vistas/principal.php');
+				header('Location: ../vistas/main.php');
 			
 			}else{
 	       

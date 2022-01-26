@@ -89,7 +89,10 @@ include_once '../vistas/navbar.php';
 							</select></td>
 				<tr>
 				<tr>
-				
+				<tr>
+					<td>Empresa: </td>
+					<td><input class= "form-control" type="text" required autocomplete="off" name="txtempresa" id="txtempresa"/> </td>
+				<tr>
 				</tr>
 				<tr>
 					<td colspan="2">

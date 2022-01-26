@@ -4,6 +4,8 @@
 <?php
 		include_once 'layout.php';
 		include_once '../DAO/PersonaDAO.php';
+		include_once '../DAO/PedidoDAO.php';
+		include_once '../DAO/ProductoDAO.php';
 		include_once 'navbar.php';
 ?>
 </head>
@@ -45,7 +47,7 @@
 <body background = "../resource/img/wp3.jpg">
 <center>
 
-<a href="../Controlador/insertarPersona.php" class="btn btn-primary">Nuevo Cliente</a>
+
 <br><br></center>
 <div class="container-fluid bg-light text-dark" >
 <div class="table-responsive">
@@ -56,43 +58,39 @@
 		<thead class="table table-striped table-active">
 			<tr>
 			<th>ID</th>
-			<th>Nombre</th>
-			<th>Apellido Paterno</th>
+			<th>Usuario</th>
+			<th>Cliente</th>
 			
-			<th>telefono</th>
-			<th>Correo</th>
+			<th>Producto</th>
+			<th>MetodoPago</th>
+			<th>Pais de Destino</th>
 			<th>Direccion</th>
-			<th>Observacion</th>
-			<th>Empresa</th>
+			<th>Fecha Pedido</th>
 			<th></th>
-			<th></th>
-			<th></th>
+			
+			
 		</tr>
 		</thead>
 		<?php
 			//Obtener un instancia de la clase PersonaDAO
-			$objPersona = new PersonaDAO();
-			$Json = $objPersona->BuscarPersonas();
+			$objPedido = new PedidoDAO();
+			$JsonPedido = $objPedido->BuscarPedidos();
 		
-			foreach(json_decode($Json) as $objper){
+			foreach(json_decode($JsonPedido) as $objpedido){
 			?>
 			<tr>
-				<td> <?php print $objper->idpersona; ?> </td>
-				<td> <?php print $objper->nombre; ?> </td>
-				<td> <?php print $objper->ap1; ?> </td>
+				<td> <?php print $objpedido->idpedido; ?> </td>
+				<td> <?php print $objpedido->idusuario; ?> </td>
+				<td> <?php print $objpedido->idpersona; ?> </td>
 				
-				<td> <?php print $objper->telefono; ?> </td>
-				<td> <?php print $objper->correo; ?> </td>
-				<td> <?php print $objper->direccion; ?> </td>
-				<td> <?php print $objper->observacion; ?> </td>
-				<td> <?php print $objper->Empresa; ?> </td>
-				<td><a class="btn btn-danger" href="../Controlador/eliminarPersona.php?idpersona=<?php print $objper->idpersona; ?>">Eliminar</a></td>
+				<td> <?php print $objpedido->idProducto; ?> </td>
+				<td> <?php print $objpedido->metododepago; ?> </td>
+				<td> <?php print $objpedido->PaisDestino; ?> </td>
+				<td> <?php print $objpedido->DireccionEnvio; ?> </td>
+				<td> <?php print $objpedido->FechaPedido; ?> </td>
 				
-				<td>
-				<a class="btn btn-success" href="../Controlador/modificarPersona.php?idpersona=<?php print $objper->idpersona; ?>&nombre=<?php print $objper->nombre; ?>&ap1=<?php print $objper->ap1; ?>&ap2=<?php print $objper->ap2; ?>&telefono=<?php print $objper->telefono; ?>&correo=<?php print $objper->correo; ?>&direccion=<?php print $objper->direccion;?>&observacion=<?php print $objper->observacion ?>;">Modificar</a></td>
-			
-				<td>
-				<a class="btn btn-primary" href="../vistas/VenderProducto.php?idpersona=<?php print $objper->idpersona; ?>&nombre=<?php print $objper->nombre; ?>&ap1=<?php print $objper->ap1; ?>&ap2=<?php print $objper->ap2; ?>&telefono=<?php print $objper->telefono; ?>&correo=<?php print $objper->correo; ?>&direccion=<?php print $objper->direccion;?>&observacion=<?php print $objper->observacion ?>;">Vender Productos</a></td>
+				
+				<td><a class="btn btn-primary" href="#">Generar Pedidos</a></td>
 			</tr>
 			<?php	
 			//<input type="button" onclick="EliminarPersona()" value="Eliminar" /> 

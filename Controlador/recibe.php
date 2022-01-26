@@ -9,13 +9,14 @@
   $correo = $_POST["txtcorreo"];
   $Direccion = $_POST["txtdireccion"];
   $observaciones = $_POST["obs"];
+  $empresa = $_POST["txtempresa"];
   
   
   //Conexion a una DB y alamcenando informacion
   $ObjPersonaDAO = new PersonaDAO();
-  $respuesta = $ObjPersonaDAO->Insert($nombre, $Ap1, $Ap2, $telefono,$correo,$Direccion,$observaciones);
+  $respuesta = $ObjPersonaDAO->Insert($nombre, $Ap1, $Ap2, $telefono,$correo,$Direccion,$observaciones,$empresa);
   
-  header("Location: ../vistas/principal.php");
+  header("Location: ../vistas/VistaClientes.php");
   
  
   
